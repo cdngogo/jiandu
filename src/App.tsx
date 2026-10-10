@@ -7,6 +7,10 @@ import AdmissionSupervision from './components/AdmissionSupervision';
 import ComplaintManagement from './components/ComplaintManagement';
 import RiskWarning from './components/RiskWarning';
 import DataAnalysis from './components/DataAnalysis';
+import SecurityAudit from './components/SecurityAudit';
+import PermissionManagement from './components/PermissionManagement';
+import ExpertDatabase from './components/ExpertDatabase';
+import EmergencyPlan from './components/EmergencyPlan';
 import { Bell, User, Menu, X } from 'lucide-react';
 
 function App() {
@@ -15,22 +19,18 @@ function App() {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'dashboard':
-        return <Dashboard />;
-      case 'exam':
-        return <ExamSupervision />;
-      case 'scoring':
-        return <ScoringSupervision />;
-      case 'admission':
-        return <AdmissionSupervision />;
-      case 'complaint':
-        return <ComplaintManagement />;
-      case 'risk':
-        return <RiskWarning />;
-      case 'analysis':
-        return <DataAnalysis />;
-      default:
-        return <Dashboard />;
+      case 'dashboard': return <Dashboard />;
+      case 'exam': return <ExamSupervision />;
+      case 'scoring': return <ScoringSupervision />;
+      case 'admission': return <AdmissionSupervision />;
+      case 'complaint': return <ComplaintManagement />;
+      case 'risk': return <RiskWarning />;
+      case 'analysis': return <DataAnalysis />;
+      case 'security': return <SecurityAudit />;
+      case 'permission': return <PermissionManagement />;
+      case 'expert': return <ExpertDatabase />;
+      case 'emergency': return <EmergencyPlan />;
+      default: return <Dashboard />;
     }
   };
 
@@ -43,30 +43,28 @@ function App() {
       complaint: '信访举报',
       risk: '风险预警',
       analysis: '数据分析',
+      security: '安全审计与保密管理',
+      permission: '权限分级管理',
+      expert: '专家库管理',
+      emergency: '应急预案管理',
     };
     return titles[activeTab] || '监督总览';
   };
 
   return (
     <div className="flex min-h-screen bg-slate-50">
-      {/* Mobile Overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
-
-      {/* Sidebar */}
       <div className={`fixed lg:static z-50 transition-transform duration-300 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
       }`}>
         <Sidebar activeTab={activeTab} setActiveTab={(tab) => { setActiveTab(tab); setSidebarOpen(false); }} />
       </div>
-
-      {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Top Header */}
         <header className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-30">
           <div className="flex items-center gap-4">
             <button
@@ -96,17 +94,13 @@ function App() {
             </div>
           </div>
         </header>
-
-        {/* Page Content */}
         <main className="flex-1 p-6 overflow-auto">
           {renderContent()}
         </main>
-
-        {/* Footer */}
         <footer className="bg-white border-t border-slate-200 px-6 py-3">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>© 2026 艺术类高校艺考招生监督工作平台</span>
-            <span>技术支持：信息化建设中心 | 版本 v2.1.0</span>
+            <span>技术支持：信息化建设中心 | 版本 v3.0.0</span>
           </div>
         </footer>
       </div>

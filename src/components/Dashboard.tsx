@@ -155,6 +155,31 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Security Posture Bar */}
+      <div className="bg-gradient-to-r from-slate-800 to-slate-700 rounded-xl p-5 text-white">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-semibold flex items-center gap-2">
+            <Shield className="w-4 h-4 text-amber-400" />
+            安全态势感知
+          </h3>
+          <span className="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded">系统安全等级：A</span>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          {[
+            { label: '数据加密', value: '100%', status: 'ok' },
+            { label: '权限合规', value: '99.8%', status: 'ok' },
+            { label: '审计完整', value: '100%', status: 'ok' },
+            { label: '异常告警', value: '3', status: 'warn' },
+            { label: '备份状态', value: '正常', status: 'ok' },
+          ].map((item, idx) => (
+            <div key={idx} className="bg-white/10 rounded-lg p-3 backdrop-blur">
+              <p className="text-xs text-slate-300">{item.label}</p>
+              <p className={`text-lg font-bold ${item.status === 'warn' ? 'text-amber-300' : 'text-green-300'}`}>{item.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Bottom Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Activities */}
